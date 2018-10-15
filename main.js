@@ -72,10 +72,12 @@ const students = [
       score: 95
   }
 ]
+// function to create an element based on given arguments
 const elementConstructor = (element, title, addedStyle, setStyle)=>{
   return `<${element} class= "${setStyle} ${addedStyle}">${title}</${element}>`
 }
 
+// two functions to call the elements constructor providing differences for pass or fail
 const passingStudent = (name, classes, info) => {
   return `
     <div id="student">
@@ -95,6 +97,7 @@ const failingStudent = (name, classes, info) => {
 
 const container = document.querySelector("#container")
 
+// for loop to determine pass or fail and call appropriate function to append to DOM
 let studentComponent = " "
 for (each of students) {
   if (each.score >= 60) { 
