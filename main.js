@@ -73,27 +73,21 @@ const students = [
   }
 ]
 // function to create an element based on given arguments
-const elementConstructor = (element, title, addedStyle, setStyle)=>{
-  return `<${element} class= "${setStyle} ${addedStyle}">${title}</${element}>`
-}
+const elementConstructor = (element, title, addedStyle, setStyle)=> `
+  <${element} class= "${setStyle} ${addedStyle}">${title}</${element}>
+`
 
-// two functions to call the elements constructor providing differences for pass or fail
-const passingStudent = (name, classes, info) => {
-  return `
-    <div id="student">
-        ${elementConstructor("h1", name, "xx-large passing", "bordered dashed")}
+
+//function to call the elements constructor providing differences for pass or fail
+const student = (name, classes, info, status) => `
+    <div class="studentCard bordered dashed">
+        ${elementConstructor("h1", name, status, " xx-large bordered dashed")}
         ${elementConstructor("section", classes, "section--padded", "bordered dashed")}
         ${elementConstructor("aside", info, "pushRight")}
-    </div>` 
-}
-const failingStudent = (name, classes, info) => {
-  return `
-    <div id="student">
-        ${elementConstructor("h1", name, "xx-large failing", "bordered dashed")}
-        ${elementConstructor("section", classes, "section--padded", "bordered dashed")}
-        ${elementConstructor("aside", info, "pushRight")}
-    </div>` 
-}
+    </div>
+    ` 
+
+
 
 const container = document.querySelector("#container")
 
@@ -101,10 +95,10 @@ const container = document.querySelector("#container")
 let studentComponent = " "
 for (each of students) {
   if (each.score >= 60) { 
-    studentComponent = passingStudent(each.name, each.class, each.info);
+    studentComponent = student(each.name, each.class, each.info, "passing");
     container.innerHTML += studentComponent;
   } else {
-    studentComponent = failingStudent(each.name, each.class, each.info);
+    studentComponent = student(each.name, each.class, each.info, "failing");
     container.innerHTML += studentComponent;
   }
 }
